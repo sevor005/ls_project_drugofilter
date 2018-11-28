@@ -1,0 +1,18 @@
+.drugofilter-header {
+  height: 45px;
+  width: 100%;
+  font-family: $firaMedium;
+  font-size: 15px;
+  font-weight: bold;
+  box-sizing: border-box;
+  color: #fff;
+  padding: 0 15px;
+  background-color: #ff8663;
+  border-radius: 10px 10px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  @import "__title/__title.scss";
+  @import "__close/__close.scss";
+}

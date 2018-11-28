@@ -1,0 +1,17 @@
+.drugofilter-input {
+  width: 285px;
+  height: 26px;
+  font-family: $firaLigth;
+  font-size: 12px;
+  border-radius: 40px;
+  background: #fff url("../img/search.png") no-repeat 5px 50%;
+  color: #4f4f4f;
+  padding: 0 25px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+}
+.drugofilter-input::-webkit-input-placeholder {color:#c2c2c2;}
+::-moz-placeholder          {color:#c2c2c2;}
+:-moz-placeholder           {color:#c2c2c2;}
+:-ms-input-placeholder      {color:#c2c2c2;}

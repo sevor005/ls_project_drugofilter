@@ -1,0 +1,16 @@
+.friend {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  
+  @import "__img/__img.scss";
+  @import "__info/__info.scss";
+  @import "__name/__name.scss";
+  @import "__close/__close.scss";
+  @import "__plus/__plus.scss";
+  @import "_active/_active.scss";
+}

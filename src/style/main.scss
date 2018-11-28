@@ -1,0 +1,36 @@
+$firaMedium: 'fira_sansmedium', Arial, sans-serif;
+$firaLigth: 'fira_sanslight', Arial, sans-serif;
+
+html,body {
+  height: 100%;
+}
+
+#homework-container {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+ul, ol, p, li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a, a:hover, a:active, a:visited {
+  text-decoration: none;
+}
+
+@import "drugofilter/drugofilter.scss";
+@import "drugofilter-header/drugofilter-header.scss";
+@import "page/page.scss";
+@import "drugofilter-search/drugofilter-search.scss";
+@import "drugofilter-input/drugofilter-input.scss";
+@import "list-friends/list-friends.scss";
+@import "friend/friend.scss";
+@import "scroll/scroll.scss";
+@import "footer/footer.scss";
+@import "btn-save/btn-save.scss";
