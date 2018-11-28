@@ -1,0 +1,20 @@
+.list-friends {
+  width: 50%;
+  height: 100%;
+  font-family: $firaMedium;
+  font-size: 11px;
+  font-weight: bold;
+  color: #4f4f4f;
+  box-sizing: border-box;
+  padding: 13px 16px;
+  position: relative;
+
+  &:first-child {
+    border-right: 1px solid #f0f0f0;
+  }
+
+  @import "__title/__title.scss";
+  @import "_left/_left.scss";
+  @import "_right/_right.scss";
+  @import "__scroll/__scroll.scss";
+}

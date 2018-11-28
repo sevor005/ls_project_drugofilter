@@ -1,0 +1,18 @@
+.btn-save {
+  width: 85px;
+  height: 30px;
+  background-color: #ff8663;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-family: $firaLigth;
+  font-weight: bold;
+  color: #fff;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: rgba(236, 76, 31, 0.8);
+  }
+}

@@ -1,0 +1,35 @@
+&__plus {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color .1s;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 4px;
+    background-color: #c4c4c4;
+    top: 3px;
+    right: 9px;
+    // transform: rotate(45deg);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    height: 15px;
+    width: 4px;
+    background-color: #c4c4c4;
+    top: 3px;
+    right: 9px;
+    transform: rotate(-90deg);
+  }
+
+  &:hover {
+    background-color: rgba(237, 241, 244, .8);
+  }
+}

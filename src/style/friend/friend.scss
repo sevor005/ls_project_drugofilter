@@ -1,0 +1,20 @@
+.friend {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: rgba(153, 153, 153, .2);
+  }
+  
+  @import "__img/__img.scss";
+  @import "__info/__info.scss";
+  @import "__name/__name.scss";
+  @import "__close/__close.scss";
+  @import "__plus/__plus.scss";
+}

@@ -1,0 +1,10 @@
+.drugofilter {
+  width: 620px;
+  height: 490px;
+  background-color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+
+  @import "__list-friends/__list-friends.scss";
+  @import "__footer/__footer.scss";
+}
