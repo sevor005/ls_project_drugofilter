@@ -1,0 +1,13 @@
+{{#each items}}
+<div class="friend" draggable="true">
+  <div class="friend__info">
+    <div class="friend__img" style="background-image: url({{photo_50}});"></div>
+    <div class="friend__name">{{first_name}} {{last_name}}</div>
+  </div>
+  {{#if ../isLeft}}
+	  <div class="friend__plus"></div>
+  {{else}}
+ 	  <div class="friend__close"></div>
+  {{/if}}
+</div>
+{{/each}}

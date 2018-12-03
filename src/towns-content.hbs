@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.js"></script> --}}
+  <script src="http://vk.com/js/api/openapi.js" type="text/javascript"></script>
 </head>
 <body>
   <div class="page">
@@ -27,29 +29,17 @@
           <div class="list-friends__title">Ваши друзья</div>
           <div class="list-friends__scroll scroll"></div>
 
-          <div class="friend">
-            <div class="friend__info">
-              <div class="friend__img" style="background-image: url('img/artem.png');"></div>
-              <div class="friend__name">Артем Барабанов</div>
-            </div>
-            <div class="friend__plus"></div>
-          </div>
+          <div class="friends-list-left"></div>
           
         </div>
 
         <div class="list-friends list-friends_right">
           <div class="list-friends__title">Друзья в списке</div>
           <div class="list-friends__scroll scroll"></div>
+          
+          <div class="friends-list-right"></div>
 
-          <div class="friend">
-            <div class="friend__info">
-              <div class="friend__img" style="background-image: url('/img/artem.png');"></div>
-              <div class="friend__name">Артем Барабанов</div>
-            </div>
-            <div class="friend__close"></div>
-          </div>
-
-        </div><!-- End drugofilter -->
+        </div>
 
       </div><!-- End drugofilter-list-friends -->
 

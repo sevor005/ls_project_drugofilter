@@ -12,11 +12,11 @@
 
 @font-face {
   font-family: 'fira_sanslight';
-  src: url('../fonts/fifa-sans-ligth/8165-webfont.eot');
-  src: url('../fonts/fifa-sans-ligth/8165-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../fonts/fifa-sans-ligth/8165-webfont.woff2') format('woff2'),
-       url('../fonts/fifa-sans-ligth/8165-webfont.woff') format('woff'),
-       url('../fonts/fifa-sans-ligth/8165-webfont.ttf') format('truetype');
+  src: url('../fonts/fifa-sans-light/8165-webfont.eot');
+  src: url('../fonts/fifa-sans-light/8165-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/fifa-sans-light/8165-webfont.woff2') format('woff2'),
+       url('../fonts/fifa-sans-light/8165-webfont.woff') format('woff'),
+       url('../fonts/fifa-sans-light/8165-webfont.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
