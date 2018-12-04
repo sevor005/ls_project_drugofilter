@@ -8,9 +8,6 @@ const leftZone = document.querySelector('.friends-list-left');
 const rightZone = document.querySelector('.friends-list-right');
 const drugofilter = document.querySelector('.drugofilter');
 
-const leftFriendHTML = renderFn({ items: leftListArray, isLeft: true });
-const rightFriendHTML = renderFn({ items: rightListArray, isLeft: false });
-
 // VK
 
 VK.init({
@@ -49,9 +46,9 @@ auth()
   })
   .then(friends => {
     const html = renderFn(friends);
-    leftListArray = friends.items;
     const result = document.querySelector('.friends-list-left');
     result.innerHTML = html;
+    leftListArray = friends.items;
   });
 
 // обработчики добавление, удаление friend
@@ -116,31 +113,36 @@ inputLeft.addEventListener('keyup', e => {
   const value = inputLeft.value;
 
   if(!value) {
-    return leftFriendHTML(leftListArray);
+    return renderFriends(leftListArray, true);
   }
 
   const filterFriends = leftListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
 
-  return leftFriendHTML(filterFriends);
+  return renderFriends(filterFriends, true);
 });
 
 inputRight.addEventListener('keyup', e => {
-  const value = inputLeft.value;
+  const value = inputRight.value;
 
   if(!value) {
-    return rightFriendHTML();
+    return renderFriends(rightListArray, false);
   }
 
   const filterFriends = rightListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
 
-  return rightFriendHTML(filterFriends);
+  return renderFriends(filterFriends, false);
 });
 
 // Добавление друзей
-const renderFriends = array => {
+const renderFriends = (array, isLeft) => {
+
   if(isLeft) {
-    leftZone.innerHTML = leftFriendHTML();
-  } else {
-    rightZone.innerHTML = rightFriendHTML();
+    const leftFriendHTML = renderFn({ items: array, isLeft: true });
+    return leftZone.innerHTML = leftFriendHTML;
+  }
+
+  else {
+    const rightFriendHTML = renderFn({ items: array, isLeft: false });
+    return rightZone.innerHTML = rightFriendHTML;
   }
 };
