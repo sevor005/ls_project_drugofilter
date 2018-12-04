@@ -3,9 +3,13 @@ import renderFn from './friendsTemplate.hbs';
 
 let leftListArray = [];
 let rightListArray = [];
+
 const leftZone = document.querySelector('.friends-list-left');
 const rightZone = document.querySelector('.friends-list-right');
 const drugofilter = document.querySelector('.drugofilter');
+
+const leftFriendHTML = renderFn({ items: leftListArray, isLeft: true });
+const rightFriendHTML = renderFn({ items: rightListArray, isLeft: false });
 
 // VK
 
@@ -45,7 +49,7 @@ auth()
   })
   .then(friends => {
     const html = renderFn(friends);
-    leftListArray = friends;
+    leftListArray = friends.items;
     const result = document.querySelector('.friends-list-left');
     result.innerHTML = html;
   });
@@ -96,4 +100,47 @@ function makeDnD(zones) {
     });
 
   });
+};
+
+// фильтрация друзей
+
+const inputLeft = document.querySelector('.drugofilter-input-left');
+const inputRight = document.querySelector('.drugofilter-input-right');
+
+const isMatching = (full, chunk) => {
+  return full.toLowerCase().indexOf(chunk.toLowerCase()) > -1;
+};
+
+// Обработка инпутов левого списка и правого списка
+inputLeft.addEventListener('keyup', e => {
+  const value = inputLeft.value;
+
+  if(!value) {
+    return leftFriendHTML(leftListArray);
+  }
+
+  const filterFriends = leftListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
+
+  return leftFriendHTML(filterFriends);
+});
+
+inputRight.addEventListener('keyup', e => {
+  const value = inputLeft.value;
+
+  if(!value) {
+    return rightFriendHTML();
+  }
+
+  const filterFriends = rightListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
+
+  return rightFriendHTML(filterFriends);
+});
+
+// Добавление друзей
+const renderFriends = array => {
+  if(isLeft) {
+    leftZone.innerHTML = leftFriendHTML();
+  } else {
+    rightZone.innerHTML = rightFriendHTML();
+  }
 };
