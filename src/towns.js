@@ -45,7 +45,7 @@ auth()
     return callAPI('friends.get', { fields: 'photo_50' });
   })
   .then(friends => {
-    const html = renderFn(friends);
+    const html = renderFn({ items: friends.items, isLeft: true });
     const result = document.querySelector('.friends-list-left');
     result.innerHTML = html;
     leftListArray = friends.items;
