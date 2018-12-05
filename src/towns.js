@@ -86,7 +86,16 @@ function makeDnD(zones) {
         if(currentDrag.sourse !== zone) {
 
           if(e.target.classList.contains('friend')) {
-            zone.appendChild(currentDrag.node, e.target.nextElementSibling);
+            const currentElement = currentDrag.node;
+            const id = currentElement.getAttribute('data-id');
+            const index = leftListArray.findIndex(friend => friend.id === Number(id));
+
+            rightListArray.push(leftListArray[index]);
+            leftListArray.splice(index, 1);
+
+            renderFriends(leftListArray, true);
+            renderFriends(rightListArray, false);
+            // zone.appendChild(currentDrag.node, e.target.nextElementSibling);
           } else {
             zone.appendChild(currentDrag.node, zone.lastElementChild);
           }
