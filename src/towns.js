@@ -45,7 +45,7 @@ auth()
     return callAPI('friends.get', { fields: 'photo_50' });
   })
   .then(friends => {
-    const rightListId = localStorage.getItem("rightListId");
+    const rightListId = localStorage.getItem("rightListId") || [];
     leftListArray = friends.items.filter(friend => !rightListId.includes(friend.id));
     rightListArray = friends.items.filter(friend => rightListId.includes(friend.id));
 
@@ -115,23 +115,27 @@ function makeDnD(zones) {
 const moveOfLeftList = currentElement => {
   const id = currentElement.getAttribute('data-id');
   const index = rightListArray.findIndex(friend => friend.id === Number(id));
+  const valueRightInput = inputRight.value;
+  const valueLeftInput = inputLeft.value;
 
   leftListArray.push(rightListArray[index]);
   rightListArray.splice(index, 1);
 
-  renderFriends(rightListArray, false);
-  renderFriends(leftListArray, true);
+  renderFriends(filterFriends(leftListArray, valueLeftInput), true);
+  renderFriends(filterFriends(rightListArray, valueRightInput), false);
 };
 
 const moveOfRightList = currentElement => {
   const id = currentElement.getAttribute('data-id');
   const index = leftListArray.findIndex(friend => friend.id === Number(id));
+  const valueRightInput = inputRight.value;
+  const valueLeftInput = inputLeft.value;
 
   rightListArray.push(leftListArray[index]);
   leftListArray.splice(index, 1);
 
-  renderFriends(leftListArray, true);
-  renderFriends(rightListArray, false);
+  renderFriends(filterFriends(leftListArray, valueLeftInput), true);
+  renderFriends(filterFriends(rightListArray, valueRightInput), false);
 };
 
 // фильтрация друзей
@@ -150,9 +154,7 @@ inputLeft.addEventListener('keyup', e => {
     return renderFriends(leftListArray, true);
   }
 
-  const filterFriends = leftListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
-
-  return renderFriends(filterFriends, true);
+  return renderFriends(filterFriends(leftListArray,value), true);
 });
 
 inputRight.addEventListener('keyup', e => {
@@ -162,10 +164,14 @@ inputRight.addEventListener('keyup', e => {
     return renderFriends(rightListArray, false);
   }
 
-  const filterFriends = rightListArray.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
-
-  return renderFriends(filterFriends, false);
+  return renderFriends(filterFriends(rightListArray,value), false);
 });
+
+const filterFriends = (listFriends, value) => {
+  if(!value) return listFriends;
+  
+  return listFriends.filter(friend => isMatching(`${friend.first_name} ${friend.last_name}`, value));
+};
 
 // Добавление друзей
 const renderFriends = (array, isLeft) => {
