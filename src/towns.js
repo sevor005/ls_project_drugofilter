@@ -45,20 +45,32 @@ auth()
     return callAPI('friends.get', { fields: 'photo_50' });
   })
   .then(friends => {
-    const html = renderFn({ items: friends.items, isLeft: true });
+    const rightListId = localStorage.getItem("rightListId");
+    leftListArray = friends.items.filter(friend => !rightListId.includes(friend.id));
+    rightListArray = friends.items.filter(friend => rightListId.includes(friend.id));
+
+    const html = renderFn({ items: leftListArray, isLeft: true });
     const result = document.querySelector('.friends-list-left');
     result.innerHTML = html;
-    leftListArray = friends.items;
+
+    const resultRight = document.querySelector('.friends-list-right');
+    const htmlRight = renderFn({ items: rightListArray, isLeft: false });
+    resultRight.innerHTML = htmlRight;
   });
 
 // обработчики добавление, удаление friend
-
 drugofilter.addEventListener('click', (e) => {
   if(!(e.target.classList.contains('friend__close'))) return;
+
+  const currentElement = e.target.parentNode;
+  moveOfLeftList(currentElement);
 });
 
 drugofilter.addEventListener('click', (e) => {
   if(!(e.target.classList.contains('friend__plus'))) return;
+  
+  const currentElement = e.target.parentNode;
+  moveOfRightList(currentElement);
 });
 
 // DnD
@@ -80,36 +92,49 @@ function makeDnD(zones) {
 
     zone.addEventListener('drop', e => {
 
-      if(currentDrag) {
+      if (currentDrag) {
         e.preventDefault();
-
-        if(currentDrag.sourse !== zone) {
-
-          if(e.target.classList.contains('friend')) {
+    
+        if (currentDrag.sourse !== zone) {
+          if(zone === leftZone) {
             const currentElement = currentDrag.node;
-            const id = currentElement.getAttribute('data-id');
-            const index = leftListArray.findIndex(friend => friend.id === Number(id));
-
-            rightListArray.push(leftListArray[index]);
-            leftListArray.splice(index, 1);
-
-            renderFriends(leftListArray, true);
-            renderFriends(rightListArray, false);
-            // zone.appendChild(currentDrag.node, e.target.nextElementSibling);
-          } else {
-            zone.appendChild(currentDrag.node, zone.lastElementChild);
+            moveOfLeftList(currentElement);
           }
-
+          if(zone === rightZone) {
+            const currentElement = currentDrag.node;
+            moveOfRightList(currentElement);
+          }
         }
-
       }
     });
 
   });
 };
 
-// фильтрация друзей
+//перемещение друзей логика рендеринга списков
+const moveOfLeftList = currentElement => {
+  const id = currentElement.getAttribute('data-id');
+  const index = rightListArray.findIndex(friend => friend.id === Number(id));
 
+  leftListArray.push(rightListArray[index]);
+  rightListArray.splice(index, 1);
+
+  renderFriends(rightListArray, false);
+  renderFriends(leftListArray, true);
+};
+
+const moveOfRightList = currentElement => {
+  const id = currentElement.getAttribute('data-id');
+  const index = leftListArray.findIndex(friend => friend.id === Number(id));
+
+  rightListArray.push(leftListArray[index]);
+  leftListArray.splice(index, 1);
+
+  renderFriends(leftListArray, true);
+  renderFriends(rightListArray, false);
+};
+
+// фильтрация друзей
 const inputLeft = document.querySelector('.drugofilter-input-left');
 const inputRight = document.querySelector('.drugofilter-input-right');
 
@@ -155,3 +180,12 @@ const renderFriends = (array, isLeft) => {
     return rightZone.innerHTML = rightFriendHTML;
   }
 };
+
+// local Storage
+drugofilter.addEventListener('click', e => {
+  if(e.target.tagName !== 'BUTTON') return;
+  const idList = rightListArray.map(elem => elem.id);
+
+  localStorage.setItem("rightListId", JSON.stringify(idList));
+  alert('Сохранено');
+});
